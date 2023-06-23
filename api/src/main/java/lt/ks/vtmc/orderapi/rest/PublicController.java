@@ -1,16 +1,12 @@
 package lt.ks.vtmc.orderapi.rest;
 
 import jakarta.validation.Valid;
-import lt.ks.vtmc.orderapi.menu.Menu;
-import lt.ks.vtmc.orderapi.menu.MenuServiceImpl;
+import lombok.RequiredArgsConstructor;
 import lt.ks.vtmc.orderapi.order.CreateOrderRequest;
 import lt.ks.vtmc.orderapi.order.OrderService;
 import lt.ks.vtmc.orderapi.user.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 
@@ -20,7 +16,6 @@ public class PublicController {
 
     private final UserService userService;
     private final OrderService orderService;
-    protected final MenuServiceImpl menuService;
 
     @GetMapping("/numberOfUsers")
     public Integer getNumberOfUsers() throws InterruptedException {
@@ -34,12 +29,7 @@ public class PublicController {
         return orderService.getOrders().size();
     }
 
-    @GetMapping("/menus")
-    public List<Menu> getMenus() {
 
-        return menuService.getMenus();
-    }
-//    @Operation(security = {@SecurityRequirement(name = SwaggerConfig.BEARER_KEY_SECURITY_SCHEME)})
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/order")
     public void createOrder(

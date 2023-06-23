@@ -58,9 +58,8 @@ public class OrderController {
     public OrderDto updateOrder(@AuthenticationPrincipal CustomUserDetails currentUser,
                              @Valid @RequestBody OrderDto createOrderRequest) {
 //var aa = createOrderRequest;
-        var requestId = createOrderRequest.id();
+        String requestId = createOrderRequest.id();
         var orderToUpdate = orderService.getOrderByID(requestId);
-        orderToUpdate.setConfirmed(createOrderRequest.confirmed());
         var aa = orderService.saveOrder(orderToUpdate);
         return orderMapper.toOrderDto(aa);
 

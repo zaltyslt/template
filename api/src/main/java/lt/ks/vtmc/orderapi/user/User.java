@@ -35,9 +35,9 @@ public class User {
     private String email;
     private String role;
 
-//    @JsonBackReference
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Order> orders = new ArrayList<>();
+    @JsonBackReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
     public User(String username, String password, String name, String email, String role) {
         this.username = username;
@@ -48,9 +48,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username != null
-                ? username
-                : name;
+        return username;
     }
 
     public void setUsername(String username) {

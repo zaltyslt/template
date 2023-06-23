@@ -1,10 +1,8 @@
 package lt.ks.vtmc.orderapi.order;
 
-import lt.ks.vtmc.orderapi.exception.ResourceNotFoundException;
-import lt.ks.vtmc.orderapi.exception.OrderNotFoundException;
 import lombok.RequiredArgsConstructor;
-import lt.ks.vtmc.orderapi.order.postitions.OrderPosition;
-import lt.ks.vtmc.orderapi.order.postitions.OrderPositionRepository;
+import lt.ks.vtmc.orderapi.exception.OrderNotFoundException;
+import lt.ks.vtmc.orderapi.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-    private final OrderPositionRepository orderPositionRepository;
+
 
     @Override
     public List<Order> getOrders() {
