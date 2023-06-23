@@ -139,7 +139,7 @@ export function PublicOrderPage({refresh}) {
                                 <Form.TextArea
                                     name='description'
                                     rows={1}
-                                    placeHolder={'Enter order description ...'}
+                                    placeholder={'Enter order description ...'}
                                     onChange={inputChange}
                                 />
                                 <Form.Select

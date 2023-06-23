@@ -36,8 +36,9 @@ export function Navbar() {
   return (
     <Menu inverted color='violet' stackable size='massive' style={{borderRadius: 0}}>
       <Container>
-        <Menu.Item header>Order-UI</Menu.Item>
+        <Menu.Item header>Task-UI</Menu.Item>
         <Menu.Item as={Link} exact='true' to="/">Home</Menu.Item>
+
         <Menu.Item as={Link} to="/adminpage" style={adminPageStyle()}>AdminPage</Menu.Item>
         <Menu.Item as={Link} to="/userpage" style={userPageStyle()}>UserPage</Menu.Item>
         <Menu.Menu position='right'>

@@ -3,7 +3,7 @@ import {Statistic, Icon, Grid, Container, Image, Segment, Dimmer, Loader} from '
 import {authApi} from '../misc/AuthApi';
 import {publicApi} from "../misc/PublicApi";
 import {handleLogError} from '../misc/Helpers';
-import {PublicOrderPage} from "../public/PublicOrderPage";
+
 
 export function Home() {
 
@@ -68,10 +68,7 @@ export function Home() {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-            <PublicOrderPage
-                refresh={getData}
 
-            />
                 {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />*/}
                 {/*<Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />*/}
             </Container>
