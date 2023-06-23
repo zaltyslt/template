@@ -3,8 +3,8 @@ import {Form, Button, Icon, Grid, Segment, Container, Select, Table, Input, Text
 import {authApi} from "../misc/AuthApi";
 import {handleLogError} from "../misc/Helpers";
 import {publicApi} from "../misc/PublicApi";
-import {TitleInputForm} from "../misc/TitleInputForm";
-import {ModalSimple} from "../misc/Modal";
+
+
 
 export function PublicOrderPage({refresh}) {
 
@@ -126,13 +126,13 @@ export function PublicOrderPage({refresh}) {
                     <Grid.Column textAlign='center'>
                         <Segment color='violet'>
 
-                            <TitleInputForm
+                            {/*<TitleInputForm*/}
 
-                                order={order}
-                                // showInfo={showInfo}
-                                inputChange={inputChange}
-                                handleCreateOrder={handleCreateOrder}
-                            />
+                            {/*    order={order}*/}
+                            {/*    // showInfo={showInfo}*/}
+                            {/*    inputChange={inputChange}*/}
+                            {/*    handleCreateOrder={handleCreateOrder}*/}
+                            {/*/>*/}
 
 
                             <Form>
@@ -153,9 +153,9 @@ export function PublicOrderPage({refresh}) {
                             </Form>
 
 
-                            {modalOpen && <ModalSimple open={modalOpen}
-                                                       onClose={handleModalClose}
-                            />}
+                            {/*{modalOpen && <ModalSimple open={modalOpen}*/}
+                            {/*                           onClose={handleModalClose}*/}
+                            {/*/>}*/}
                             <Table compact striped selectable>
                                 <Table.Header>
                                     <Table.Row>

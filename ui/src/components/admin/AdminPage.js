@@ -14,9 +14,7 @@ export function AdminPage() {
     const [users, setUsers] = useState([]);
     const [orders, setOrders] = useState([]);
     const [orderDescription, setOrderDescription] = useState('');
-    const [menuDescription, setMenuDescription] = useState('');
     const [orderTextSearch, setOrderTextSearch] = useState('');
-    const [menuTextSearch, setMenuTextSearch] = useState('');
     const [usernameSearch, setUserNameSearch] = useState('');
     const [isAdmin, setIsAdmin] = useState(true);
     const [isUsersLoading, setIsUsersLoading] = useState(false);
@@ -24,19 +22,7 @@ export function AdminPage() {
     const [isOrderEdited, setIsOrderEdited] = useState(false);
     const [orderToEdit, setOrderToEdit] = useState(undefined);
 
-
-    const [isMenusLoading, setIsMenusLoading] = useState(false);
-    const [isMenuEdited, setIsMenuEdited] = useState(false);
-    const [menus, setMenus] = useState([]);
-
     const [messageText, setMessageText] = useState(undefined);
-    const [menuToEdit, setMenuToEdit] = useState(undefined); //sets corresponding array cell
-
-    const [dishes, setDishes] = useState([]);
-    const [dishTitle, setDishTitle] = useState('');
-    const [dishDescription, setDishDescription] = useState('');
-    const [dishQuantity, setDishQuantity] = useState('');
-    const [isDishesLoading, setIsDishesLoading] = useState(false);
 
 
     useEffect(() => {
@@ -46,8 +32,7 @@ export function AdminPage() {
 
         handleGetUsers();
         handleGetOrders();
-        handleGetMenus();
-        handleGetDishes();
+
     }, [Auth]);
 
 
@@ -59,26 +44,11 @@ export function AdminPage() {
             setUserNameSearch(value);
         } else if (name === 'orderTextSearch') {
             setOrderTextSearch(value);
-        } else if (name === 'menuTextSearch') {
-           setMenuTextSearch(value);
-        }else if (name === 'orderDescription') {
+        } else if (name === 'orderDescription') {
             setOrderDescription(value);
-        } else if (name === 'menuDescription') {
-            setMenuDescription(value);
-        }else if (name === 'orderTextAria') {
-            setMenuDescription(value);
         }
     }
-    const handleDishInputs = (e, {name, value}) => {
-        console.log(name + ' ' + value);
-        if (name === 'dishTitle') {
-            setDishTitle(value);
-        } else if (name === 'dishDescription') {
-            setDishDescription(value);
-        } else if (name === 'dishQuantity ') {
-            setDishQuantity(value);
-        }
-    }
+
 
     const handleGetUsers = () => {
 
@@ -97,43 +67,8 @@ export function AdminPage() {
             })
     }
 
-    const handleGetDishes = () => {
 
-        const user = Auth.getUser();
 
-        setIsDishesLoading(true);
-        authApi.getDishes(user)
-            .then(response => {
-                setDishes(response.data);
-            })
-            .catch(error => {
-                handleLogError(error);
-            })
-            .finally(() => {
-                setIsDishesLoading(false);
-            })
-    }
-    const handleCreateDish = () => {
-        const user = Auth.getUser();
-
-        // let { orderDescription } = this.state
-        let dishTitleLocal = dishTitle.trim()
-        if (!dishTitleLocal) {
-            return;
-        }
-
-        const dish = {id: null, title: dishTitle, description: dishDescription,};
-
-        authApi.createDish(user, dish)
-            .then(() => {
-                handleGetDishes();
-                setDishTitle('');
-                setDishDescription('');
-            })
-            .catch(error => {
-                handleLogError(error);
-            })
-    }
     const handleDeleteUser = (username) => {
         // const Auth = this.context
         const user = Auth.getUser()
@@ -243,8 +178,6 @@ export function AdminPage() {
         const order = {
             clientName: user.data.name,
             description: orderDescription,
-            validated: undefined,
-            orderPositions: [],
         };
 
         authApi.createOrder(user, order)
@@ -272,123 +205,6 @@ export function AdminPage() {
                 setOrders([]);
             })
     }
-// mmenu
-    const handleGetMenus = () => {
-        const user = Auth.getUser();
-console.log('search menu ' + menuTextSearch);
-        setIsMenusLoading(true);
-        const text = menuTextSearch;
-        authApi.getMenus(user,text)
-            .then(response => {
-                setMenus(response.data);
-               console.log(response.data);
-            })
-            .catch(error => {
-                handleLogError(error)
-            })
-            .finally(() => {
-                setIsMenusLoading(false);
-            })
-    }
-    const handleCreateMenu = () => {
-        console.log('menuDescription');
-
-        const user = Auth.getUser();
-        setIsMenusLoading(true);
-        const menu = {id: null, title: menuDescription, positions: [],}
-        authApi.createMenu(user, menu)
-            .then(response => {
-                setMenus(response.data);
-                // console.log(response.data);
-                setMenuDescription('');
-            })
-            .catch(error => {
-                handleLogError(error);
-            })
-            .finally(() => {
-                setIsMenusLoading(false);
-            })
-    }
-    const handleDeleteMenu = (menuId) => {
-        console.log(menuId);
-        const user = Auth.getUser();
-        setIsMenusLoading(true);
-
-        authApi.deleteMenu(user, menuId)
-            .then(response => {
-                console.log('delete OK');
-                setMenus(response.data);
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-                handleLogError(error)
-            })
-            .finally(() => {
-                console.log('delete finally');
-                setIsMenusLoading(false);
-            })
-    }
-    const handleEditMenu = (menuId) => {
-        console.log(menuId);
-        // console.log(menus[menuId]);
-        // console.log(isMenuEdited);
-
-        if (!isMenuEdited) {
-            setMenuDescription(menus[menuId].title);
-            setMenuToEdit(menus[menuId]);
-        } else {
-            setMenuDescription('');
-            setMenuToEdit(undefined);
-        }
-        setIsMenuEdited(!isMenuEdited);
-    }
-
-    const handleUpdateMenu = (menu) => {
-        console.log(menu);
-        const user = Auth.getUser();
-        setIsMenusLoading(true);
-
-        authApi.createMenu(user, menu)
-            .then(response => {
-                setMenus(response.data);
-            })
-            .catch(error => {
-                handleLogError(error)
-            })
-            .finally(() => {
-                setIsMenuEdited(false)
-                setIsMenusLoading(false);
-            })
-
-    }
-    const handleMenuChanges = (e, {name, value}) => {
-
-        console.log(name + ' ' + value);
-        // console.log(typeof name);
-        // console.log(!isNaN(value));
-
-        if (name === 'menuDescription') {
-            setMenuDescription(value);
-
-        } else if (name === 'remove') {
-            // console.log('remove from menu '  + value);
-        } else if (name === 'add') {
-            // console.log('add to menu '  + value);
-        } else if (typeof name === 'number' && (!isNaN(value))) {
-            console.log('Change dish ' + name + ' quantity ' + Number(value));
-            const positionsAll = menuToEdit.positions;
-            const positionOld = menuToEdit.positions[name];
-            positionsAll[name] = {...positionOld, quantity: Number(value)};
-
-            setMenuToEdit({
-                id: menuToEdit.id,
-                title: menuToEdit.title,
-                positions: positionsAll,
-            });
-        }
-    }
-
 
 
 
@@ -417,28 +233,6 @@ console.log('search menu ' + menuTextSearch);
                     handleSearchOrder={handleSearchOrder}
                     handleInputChange={handleInputChange}
                     isOrderEdited={isOrderEdited}
-
-                    isMenusLoading={isMenusLoading}
-                    isMenuEdited={isMenuEdited}
-                    menus={menus}
-                    menuDescription={menuDescription}
-                    menuTextSearch={menuTextSearch}
-                    messageText={messageText}
-                    handleEditMenu={handleEditMenu}
-                    handleCreateMenu={handleCreateMenu}
-                    handleDeleteMenu={handleDeleteMenu}
-                    handleUpdateMenu={handleUpdateMenu}
-                    handleMenuChanges={handleMenuChanges}
-                    menuToEdit={menuToEdit}
-                    handleGetMenus={handleGetMenus}
-
-                    dishes={dishes}
-                    isDishesLoading={isDishesLoading}
-                    dishTitle={dishTitle}
-                    dishDescription={dishDescription}
-                    handleGetDishes={handleGetDishes}
-                    handleDishInputs={handleDishInputs}
-                    handleCreateDish={handleCreateDish}
 
                 />
             </Container>

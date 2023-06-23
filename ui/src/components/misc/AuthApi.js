@@ -7,17 +7,11 @@ export const authApi = {
   signup,
   getUsers,
   deleteUser,
-  getDishes,
-  createDish,
   getOrders,
   deleteOrder,
   createOrder,
   updateOrder,
-  getMenus,
-  createMenu,
-  deleteMenu,
-
-  getUserMe
+  getUserMe,
 }
 
 function numberOfUsers() {
@@ -60,54 +54,6 @@ function getOrders(user, text) {
   return instance.get(url, {
     headers: { 'Authorization': bearerAuth(user) }
   })
-}
-
-function getDishes(user, text) {
-  const url = text ? `/api/dishes?text=${text}` : '/api/dishes'
-  return instance.get(url, {
-    headers: { 'Authorization': bearerAuth(user) }
-  })
-}
-function createDish(user, dish) {
-  return instance.post('/api/dishes/create', dish, {
-    headers: {
-      'Content-type': 'application/json',
-      'Authorization': bearerAuth(user)
-    }
-  });
-}
-
-function createMenu(user, menu) {
-  return instance.post('/api/menus/create', menu, {
-    headers: {
-      'Content-type': 'application/json',
-      'Authorization': bearerAuth(user)
-    }
-  });
-}
-function deleteMenu(user, menuId) {
-  console.log(menuId);
-  return instance.delete(`/api/menus/delete?id=${menuId}`, {
-    headers: {
-      // 'Content-type': 'application/json',
-      'Authorization': bearerAuth(user)
-    }
-  });
-}
-// function updateMenu(user, menu) {
-//   console.log(menu);
-//   return instance.post(`/api/menus`,menu, {
-//     headers: {
-//       'Content-type': 'application/json',
-//       'Authorization': bearerAuth(user)
-//     }
-//   });
-// }
-
-function getMenus(user, text) {
-  const url = text ? `/api/menus?text=${text}` : '/api/menus';
-  return instance.get(url, user &&{headers: { 'Authorization': bearerAuth(user) } });
-
 }
 
 function deleteOrder(user, orderId) {

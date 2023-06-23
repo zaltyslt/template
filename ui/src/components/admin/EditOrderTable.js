@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Grid, Form, Button, Input, Table, Header, Segment} from 'semantic-ui-react';
 
-import {PositionsList} from "../misc/PositionsList";
+// import {PositionsList} from "../misc/PositionsList";
 import {format} from "date-fns";
-import {BackButton} from "../misc/BackButton";
+// import {BackButton} from "../misc/BackButton";
 
 export function EditOrderTable({orderToEdit, handleEditOrder, handleUpdateOrder}) {
 
@@ -24,19 +24,19 @@ handleUpdateOrder({...orderToEdit,confirmed:value,})
                     <Grid.Column>
                         <p>{`Created: ${format(new Date(orderToEdit.createdAt), "yyyy MM dd HH:mm:ss")} `}</p>
                         <p>{`Status: ${orderToEdit.confirmed || 'Not confirmed'}`}</p>
-                        <PositionsList
-                            positions={orderToEdit.positions}
-                            handleMenuChanges={{}}
-                            options={{quantityInput: true, action: false}}
-                        />
+                        {/*<PositionsList*/}
+                        {/*    positions={orderToEdit.positions}*/}
+                        {/*    handleMenuChanges={{}}*/}
+                        {/*    options={{quantityInput: true, action: false}}*/}
+                        {/*/>*/}
 
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns='3'>
                     <Grid.Column width={'5'}>
-                        <BackButton
-                            handleGoBack={handleEditOrder}
-                        />
+                        {/*<BackButton*/}
+                        {/*    handleGoBack={handleEditOrder}*/}
+                        {/*/>*/}
                         {/*<Button*/}
                         {/*    circular*/}
                         {/*    color='blue'*/}

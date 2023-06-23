@@ -1,7 +1,7 @@
 import React from 'react';
 import {Grid, Form, Button, Input, Icon, Table} from 'semantic-ui-react';
-// import {OrderForm} from '../misc/OrderForm';
-import {OrderForm} from "../misc/OrderForm";
+import {OrderForm} from '../misc/OrderForm';
+
 import {format} from "date-fns";
 
 
@@ -76,13 +76,14 @@ export function OrderTable({
                                 onChange={handleInputChange}
                             />
                         </Form>
+
                     </Grid.Column>
                     <Grid.Column>
-                        {/*<OrderForm*/}
-                        {/*    orderDescription={orderDescription}*/}
-                        {/*    handleInputChange={handleInputChange}*/}
-                        {/*    handleCreateOrder={handleCreateOrder}*/}
-                        {/*/>*/}
+                        <OrderForm
+                            orderDescription={orderDescription}
+                            handleInputChange={handleInputChange}
+                            handleCreateOrder={handleCreateOrder}
+                        />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

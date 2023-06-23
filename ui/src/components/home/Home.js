@@ -3,7 +3,7 @@ import {Statistic, Icon, Grid, Container, Image, Segment, Dimmer, Loader} from '
 import {authApi} from '../misc/AuthApi';
 import {publicApi} from "../misc/PublicApi";
 import {handleLogError} from '../misc/Helpers';
-import {PublicOrderPage} from "../orders/PublicOrderPage";
+import {PublicOrderPage} from "../public/PublicOrderPage";
 
 export function Home() {
 
